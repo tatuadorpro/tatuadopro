@@ -2,77 +2,184 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-@layer components {
-  .btn-primary {
-    @apply bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg transition-colors duration-200 font-medium;
-  }
-  
-  .btn-secondary {
-    @apply bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg transition-colors duration-200 font-medium;
-  }
-  
-  .card {
-    @apply bg-white rounded-xl shadow-sm border border-gray-200 p-6;
-  }
-  
-  .input-field {
-    @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all duration-200;
-  }
-}
-
+/* Estilos personalizados para o calendário */
 .react-calendar {
-  @apply w-full bg-white border border-gray-200 rounded-lg p-4;
+  width: 100%;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-family: inherit;
 }
 
 .react-calendar__navigation {
-  @apply flex justify-between items-center mb-4;
+  display: flex;
+  height: 44px;
+  margin-bottom: 1em;
 }
 
 .react-calendar__navigation button {
-  @apply px-3 py-1 text-primary-600 hover:bg-primary-50 rounded transition-colors;
+  min-width: 44px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.react-calendar__navigation button:hover {
+  background-color: #f3f4f6;
+}
+
+.react-calendar__navigation button:disabled {
+  background-color: #f9fafb;
+  color: #9ca3af;
 }
 
 .react-calendar__month-view__weekdays {
-  @apply grid grid-cols-7 gap-1 mb-2;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.75em;
+  color: #6b7280;
 }
 
 .react-calendar__month-view__weekdays__weekday {
-  @apply text-center text-sm font-medium text-gray-500 py-2;
+  padding: 0.5em;
 }
 
-.react-calendar__month-view__days {
-  @apply grid grid-cols-7 gap-1;
+.react-calendar__month-view__days__day {
+  position: relative;
 }
 
 .react-calendar__tile {
-  @apply aspect-square flex items-center justify-center text-sm hover:bg-primary-50 rounded transition-colors relative;
+  max-width: 100%;
+  padding: 10px 6px;
+  background: none;
+  border: none;
+  text-align: center;
+  line-height: 16px;
+  font-size: 14px;
+  color: #374151;
+}
+
+.react-calendar__tile:hover {
+  background-color: #e5e7eb;
 }
 
 .react-calendar__tile--active {
-  @apply bg-primary-600 text-white;
+  background: #3b82f6;
+  color: white;
+}
+
+.react-calendar__tile--active:hover {
+  background: #2563eb;
 }
 
 .react-calendar__tile--now {
-  @apply bg-primary-100 text-primary-800;
+  background: #fef3c7;
+  color: #92400e;
 }
 
-.calendar-event {
-  @apply absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full;
+.react-calendar__tile--now:hover {
+  background: #fde68a;
 }
 
-.calendar-event.income {
-  @apply bg-green-500;
+/* Estilos para scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
 
-.calendar-event.expense {
-  @apply bg-red-500;
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Animações */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Estilos para cards */
+.card {
+  @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6;
+}
+
+.card:hover {
+  @apply shadow-md;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+/* Estilos para botões */
+.btn-primary {
+  @apply bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors;
+}
+
+.btn-secondary {
+  @apply bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors;
+}
+
+.btn-success {
+  @apply bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors;
+}
+
+.btn-danger {
+  @apply bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors;
+}
+
+/* Estilos para inputs */
+.input {
+  @apply w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+}
+
+/* Estilos para tabelas */
+.table {
+  @apply w-full bg-white rounded-lg shadow overflow-hidden;
+}
+
+.table th {
+  @apply px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;
+}
+
+.table td {
+  @apply px-6 py-4 whitespace-nowrap text-sm text-gray-900;
+}
+
+.table tr:hover {
+  @apply bg-gray-50;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .card {
+    @apply p-4;
+  }
+  
+  .table {
+    @apply text-sm;
+  }
+  
+  .table th,
+  .table td {
+    @apply px-3 py-2;
+  }
 }

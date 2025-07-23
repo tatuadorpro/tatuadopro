@@ -1,35 +1,60 @@
-export interface Transaction {
+export interface Cliente {
   id: string;
-  type: 'income' | 'expense';
-  amount: number;
-  description: string;
-  category: string;
-  date: Date;
+  nome: string;
+  telefone: string;
+  email?: string;
+  endereco?: string;
+  observacoes?: string;
   createdAt: Date;
   updatedAt: Date;
 }
 
-export interface Category {
+export interface Agendamento {
   id: string;
-  name: string;
-  type: 'income' | 'expense';
-  color: string;
-  icon: string;
+  clienteId: string;
+  clienteNome: string;
+  data: Date;
+  horario: string;
+  servico: string;
+  valor: number;
+  status: 'agendado' | 'confirmado' | 'em_andamento' | 'concluido' | 'cancelado';
+  observacoes?: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface Transacao {
+  id: string;
+  tipo: 'receita' | 'despesa';
+  categoria: string;
+  descricao: string;
+  valor: number;
+  data: Date;
+  agendamentoId?: string;
+  metodoPagamento?: string;
+  observacoes?: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface Servico {
+  id: string;
+  nome: string;
+  preco: number;
+  duracao: number; // em minutos
+  descricao?: string;
+  ativo: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface DashboardStats {
-  totalIncome: number;
-  totalExpenses: number;
-  balance: number;
-  monthlyIncome: number;
-  monthlyExpenses: number;
-  monthlyBalance: number;
-}
-
-export interface CalendarEvent {
-  id: string;
-  date: string;
-  transactions: Transaction[];
-  totalIncome: number;
-  totalExpenses: number;
+  totalReceitas: number;
+  totalDespesas: number;
+  saldoMensal: number;
+  agendamentosHoje: number;
+  agendamentosSemana: number;
+  clientesAtivos: number;
+  receitaMedia: number;
+  crescimentoMensal: number;
 }
